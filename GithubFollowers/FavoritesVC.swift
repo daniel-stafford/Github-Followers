@@ -11,6 +11,6 @@ class FavoritesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // system color adjust slightly to dark and light modes
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBrown
     }
 }
