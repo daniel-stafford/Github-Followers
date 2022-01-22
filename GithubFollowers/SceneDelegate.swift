@@ -10,13 +10,21 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
+// similar to didFinishLaunchingWithOptions in appDelegate pre-iOS 13
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        // fill up entire screen with scene
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        // assign our window's windowScene to delegate's windowScene
+        window?.windowScene = windowScene
+        // set up root view controller
+        window?.rootViewController = ViewController()
+        // make visible
+        window?.makeKeyAndVisible()
+        // 👀 remember to add app icons!
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
