@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		DD42C002279C05D200866672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C001279C05D200866672 /* AppDelegate.swift */; };
 		DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C003279C05D200866672 /* SceneDelegate.swift */; };
-		DD42C006279C05D200866672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C005279C05D200866672 /* ViewController.swift */; };
 		DD42C00B279C05D600866672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD42C00A279C05D600866672 /* Assets.xcassets */; };
 		DD42C00E279C05D600866672 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD42C00C279C05D600866672 /* LaunchScreen.storyboard */; };
+		DD42C016279C2A9A00866672 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C015279C2A9A00866672 /* SearchVC.swift */; };
+		DD42C018279C2AF400866672 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C017279C2AF400866672 /* FavoritesVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD42BFFE279C05D200866672 /* GithubFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD42C001279C05D200866672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD42C003279C05D200866672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD42C005279C05D200866672 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DD42C00A279C05D600866672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD42C00D279C05D600866672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD42C00F279C05D600866672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD42C015279C2A9A00866672 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		DD42C017279C2AF400866672 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +56,13 @@
 		DD42C000279C05D200866672 /* GithubFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				DD42C00F279C05D600866672 /* Info.plist */,
 				DD42C001279C05D200866672 /* AppDelegate.swift */,
+				DD42C017279C2AF400866672 /* FavoritesVC.swift */,
 				DD42C003279C05D200866672 /* SceneDelegate.swift */,
-				DD42C005279C05D200866672 /* ViewController.swift */,
+				DD42C015279C2A9A00866672 /* SearchVC.swift */,
 				DD42C00A279C05D600866672 /* Assets.xcassets */,
 				DD42C00C279C05D600866672 /* LaunchScreen.storyboard */,
-				DD42C00F279C05D600866672 /* Info.plist */,
 			);
 			path = GithubFollowers;
 			sourceTree = "<group>";
@@ -134,7 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD42C006279C05D200866672 /* ViewController.swift in Sources */,
+				DD42C018279C2AF400866672 /* FavoritesVC.swift in Sources */,
+				DD42C016279C2A9A00866672 /* SearchVC.swift in Sources */,
 				DD42C002279C05D200866672 /* AppDelegate.swift in Sources */,
 				DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */,
 			);
@@ -205,7 +209,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -260,7 +264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -275,6 +279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MBN26N222P;
@@ -303,6 +308,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MBN26N222P;
