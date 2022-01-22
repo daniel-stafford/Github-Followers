@@ -14,7 +14,7 @@ class SearchVC: UIViewController {
     // try to keep names generic
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
 
-    var isUsernameEntered: Bool { !usernameTextField.text!.isEmpty }
+    var isUsernameEntered: Bool { !(usernameTextField.text?.isEmpty ?? false) }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +39,14 @@ class SearchVC: UIViewController {
         // tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
-
+	
     @objc func pushFollowerListVC() {
         let followersListVC = FollowersListVC()
-		// basic text validation, could get regex for further validation
-		guard isUsernameEntered else { return }
+        // basic text validation, could get regex for further validation
+        guard isUsernameEntered else {
+			presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a Github username, so we know who to look for! 😀", buttonTitle: "OK")
+            return
+        }
         followersListVC.username = usernameTextField.text
         followersListVC.title = usernameTextField.text
         navigationController?.pushViewController(followersListVC, animated: true)
@@ -56,7 +59,7 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         // stringly typed: dangerous, so should be moved to a constant later
-        logoImageView.image = UIImage(named: "gh-logo")!
+        logoImageView.image = UIImage.named("gh-logo")
         // typically four constraints
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -103,5 +106,15 @@ extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushFollowerListVC()
         return true
+    }
+}
+
+extension UIImage {
+    static func named(_ name: String) -> UIImage {
+        if let image = UIImage(named: name) {
+            return image
+        } else {
+            fatalError("Could not initialize \(UIImage.self) named \(name).")
+        }
     }
 }
