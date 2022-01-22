@@ -39,12 +39,15 @@ class SearchVC: UIViewController {
         // tap anywhere to dismiss keyboard
         view.addGestureRecognizer(tap)
     }
-	
+
     @objc func pushFollowerListVC() {
         let followersListVC = FollowersListVC()
         // basic text validation, could get regex for further validation
         guard isUsernameEntered else {
-			presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a Github username, so we know who to look for! 😀", buttonTitle: "OK")
+            let title = "Empty Username"
+            let message = "Please enter a Github username, so we know who to look for! 😀"
+            let buttonTitle = "OK"
+            presentGFAlertOnMainThread(title: title, message: message, buttonTitle: buttonTitle)
             return
         }
         followersListVC.username = usernameTextField.text
@@ -106,15 +109,5 @@ extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushFollowerListVC()
         return true
-    }
-}
-
-extension UIImage {
-    static func named(_ name: String) -> UIImage {
-        if let image = UIImage(named: name) {
-            return image
-        } else {
-            fatalError("Could not initialize \(UIImage.self) named \(name).")
-        }
     }
 }
