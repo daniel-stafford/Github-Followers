@@ -9,8 +9,6 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    
-
     // similar to didFinishLaunchingWithOptions in appDelegate pre-iOS 13
     // import to keep this function tidy, separate out to functions when possible
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -24,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = createTabBar()
         // make visible
         window?.makeKeyAndVisible()
-        // remember to add app icons!
+		// change tint
+		configureNavigationBar()
     }
 
     func createSearchNC() -> UINavigationController {
@@ -54,6 +53,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBar.viewControllers = [createSearchNC(), createFavoritesNC()]
 
         return tabBar
+    }
+
+    func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -14,6 +14,8 @@ class SearchVC: UIViewController {
     // try to keep names generic
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
 
+    var isUsernameEntered: Bool { !usernameTextField.text!.isEmpty }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // white for dark mode and vice versa
@@ -22,16 +24,34 @@ class SearchVC: UIViewController {
         configureLogoImageView()
         configureUserNameTextField()
         configureCallToActionButton()
+        dismissKeyBoardTapeGesture()
     }
 
-    // hide navBar in viewDidAppear as will get called on back navigation, viewDidLoad only once!
+    // hide navBar in viewDidAppear as will get called on back navigation, viewDidLoad only gets called once!
     override func viewWillAppear(_ animated: Bool) {
         // remember to call the super! Unless you don't want parent functionality
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
 
+    func dismissKeyBoardTapeGesture() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        // tap anywhere to dismiss keyboard
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func pushFollowerListVC() {
+        let followersListVC = FollowersListVC()
+		// basic text validation, could get regex for further validation
+		guard isUsernameEntered else { return }
+        followersListVC.username = usernameTextField.text
+        followersListVC.title = usernameTextField.text
+        navigationController?.pushViewController(followersListVC, animated: true)
+    }
+
     func configureLogoImageView() {
+        // whenever we tap this button, pushFollowerListVC will run
+        callToActionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
         // same as creating an @IB Outlet, easy to forget 😊
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +70,8 @@ class SearchVC: UIViewController {
 
     func configureUserNameTextField() {
         view.addSubview(usernameTextField)
+        // 👀 set the searchVC to listen for usernameTextField, easy to forget this!
+        usernameTextField.delegate = self
 
         NSLayoutConstraint.activate([
             usernameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
@@ -73,5 +95,13 @@ class SearchVC: UIViewController {
             callToActionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             callToActionButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+}
+
+// cleaner to set delegates as separate extension
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowerListVC()
+        return true
     }
 }
