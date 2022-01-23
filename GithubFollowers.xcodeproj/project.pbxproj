@@ -22,6 +22,7 @@
 		DDE5EC6A279CB44D0011BE56 /* GFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EC69279CB44D0011BE56 /* GFAlertContainerView.swift */; };
 		DDE5EC6C279CC44A0011BE56 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EC6B279CC44A0011BE56 /* UIViewController+Ext.swift */; };
 		DDE5EC6E279CCDC60011BE56 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EC6D279CCDC60011BE56 /* UIImage+Ext.swift */; };
+		DDE5EC75279D61B00011BE56 /* sort-Xcode-project-file in Resources */ = {isa = PBXBuildFile; fileRef = DDE5EC74279D61B00011BE56 /* sort-Xcode-project-file */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		DDE5EC69279CB44D0011BE56 /* GFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertContainerView.swift; sourceTree = "<group>"; };
 		DDE5EC6B279CC44A0011BE56 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		DDE5EC6D279CCDC60011BE56 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		DDE5EC74279D61B00011BE56 /* sort-Xcode-project-file */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sort-Xcode-project-file"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,7 @@
 		DD42BFF5279C05D200866672 = {
 			isa = PBXGroup;
 			children = (
-				DDE5EC6D279CCDC60011BE56 /* UIImage+Ext.swift */,
+				DDE5EC73279D619F0011BE56 /* Scripts */,
 				DD42C000279C05D200866672 /* GithubFollowers */,
 				DD42BFFF279C05D200866672 /* Products */,
 			);
@@ -75,23 +77,64 @@
 		DD42C000279C05D200866672 /* GithubFollowers */ = {
 			isa = PBXGroup;
 			children = (
+				DDE5EC70279D5EEA0011BE56 /* CustomViews */,
+				DDE5EC71279D5F2C0011BE56 /* Extensions */,
+				DDE5EC6F279D5EA00011BE56 /* Screens */,
+				DDE5EC72279D5F990011BE56 /* Support */,
 				DD42C00F279C05D600866672 /* Info.plist */,
-				DD42C001279C05D200866672 /* AppDelegate.swift */,
-				DD42C017279C2AF400866672 /* FavoritesVC.swift */,
-				DDE5EC5C279C3CE50011BE56 /* GFButton.swift */,
-				DDE5EC5E279C451F0011BE56 /* GFTextField.swift */,
-				DD42C003279C05D200866672 /* SceneDelegate.swift */,
-				DD42C015279C2A9A00866672 /* SearchVC.swift */,
-				DDE5EC6B279CC44A0011BE56 /* UIViewController+Ext.swift */,
-				DDE5EC60279C5F4F0011BE56 /* FollowersListVC.swift */,
-				DD42C00A279C05D600866672 /* Assets.xcassets */,
-				DDE5EC63279C95A40011BE56 /* GFTitleLabel.swift */,
-				DD42C00C279C05D600866672 /* LaunchScreen.storyboard */,
-				DDE5EC67279CACB70011BE56 /* GFAlertVC.swift */,
-				DDE5EC65279CA7300011BE56 /* GFBodyLabel.swift */,
-				DDE5EC69279CB44D0011BE56 /* GFAlertContainerView.swift */,
 			);
 			path = GithubFollowers;
+			sourceTree = "<group>";
+		};
+		DDE5EC6F279D5EA00011BE56 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				DD42C017279C2AF400866672 /* FavoritesVC.swift */,
+				DDE5EC60279C5F4F0011BE56 /* FollowersListVC.swift */,
+				DD42C015279C2A9A00866672 /* SearchVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		DDE5EC70279D5EEA0011BE56 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				DDE5EC69279CB44D0011BE56 /* GFAlertContainerView.swift */,
+				DDE5EC67279CACB70011BE56 /* GFAlertVC.swift */,
+				DDE5EC65279CA7300011BE56 /* GFBodyLabel.swift */,
+				DDE5EC5C279C3CE50011BE56 /* GFButton.swift */,
+				DDE5EC5E279C451F0011BE56 /* GFTextField.swift */,
+				DDE5EC63279C95A40011BE56 /* GFTitleLabel.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		DDE5EC71279D5F2C0011BE56 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DDE5EC6D279CCDC60011BE56 /* UIImage+Ext.swift */,
+				DDE5EC6B279CC44A0011BE56 /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DDE5EC72279D5F990011BE56 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				DD42C001279C05D200866672 /* AppDelegate.swift */,
+				DD42C00A279C05D600866672 /* Assets.xcassets */,
+				DD42C00C279C05D600866672 /* LaunchScreen.storyboard */,
+				DD42C003279C05D200866672 /* SceneDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		DDE5EC73279D619F0011BE56 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				DDE5EC74279D61B00011BE56 /* sort-Xcode-project-file */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +148,7 @@
 				DD42BFFB279C05D200866672 /* Frameworks */,
 				DD42BFFC279C05D200866672 /* Resources */,
 				DDE5EC62279C656D0011BE56 /* Run Lint */,
+				DDE5EC76279D62160011BE56 /* Sort Files */,
 			);
 			buildRules = (
 			);
@@ -153,8 +197,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD42C00E279C05D600866672 /* LaunchScreen.storyboard in Resources */,
 				DD42C00B279C05D600866672 /* Assets.xcassets in Resources */,
+				DD42C00E279C05D600866672 /* LaunchScreen.storyboard in Resources */,
+				DDE5EC75279D61B00011BE56 /* sort-Xcode-project-file in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +224,24 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		DDE5EC76279D62160011BE56 /* Sort Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sort Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PROJECT_DIR}/Scripts/sort-Xcode-project-file\" \"${PROJECT_FILE_PATH}/project.pbxproj\" \n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -186,19 +249,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE5EC5F279C451F0011BE56 /* GFTextField.swift in Sources */,
-				DDE5EC61279C5F4F0011BE56 /* FollowersListVC.swift in Sources */,
-				DDE5EC6C279CC44A0011BE56 /* UIViewController+Ext.swift in Sources */,
-				DD42C018279C2AF400866672 /* FavoritesVC.swift in Sources */,
-				DDE5EC5D279C3CE50011BE56 /* GFButton.swift in Sources */,
-				DDE5EC66279CA7300011BE56 /* GFBodyLabel.swift in Sources */,
-				DDE5EC6E279CCDC60011BE56 /* UIImage+Ext.swift in Sources */,
-				DDE5EC64279C95A40011BE56 /* GFTitleLabel.swift in Sources */,
-				DD42C016279C2A9A00866672 /* SearchVC.swift in Sources */,
 				DD42C002279C05D200866672 /* AppDelegate.swift in Sources */,
-				DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */,
-				DDE5EC68279CACB70011BE56 /* GFAlertVC.swift in Sources */,
+				DD42C018279C2AF400866672 /* FavoritesVC.swift in Sources */,
+				DDE5EC61279C5F4F0011BE56 /* FollowersListVC.swift in Sources */,
 				DDE5EC6A279CB44D0011BE56 /* GFAlertContainerView.swift in Sources */,
+				DDE5EC68279CACB70011BE56 /* GFAlertVC.swift in Sources */,
+				DDE5EC66279CA7300011BE56 /* GFBodyLabel.swift in Sources */,
+				DDE5EC5D279C3CE50011BE56 /* GFButton.swift in Sources */,
+				DDE5EC5F279C451F0011BE56 /* GFTextField.swift in Sources */,
+				DDE5EC64279C95A40011BE56 /* GFTitleLabel.swift in Sources */,
+				DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */,
+				DD42C016279C2A9A00866672 /* SearchVC.swift in Sources */,
+				DDE5EC6E279CCDC60011BE56 /* UIImage+Ext.swift in Sources */,
+				DDE5EC6C279CC44A0011BE56 /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +330,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -322,6 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
