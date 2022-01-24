@@ -31,7 +31,7 @@ class SearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // remember to call the super! Unless you don't want parent functionality
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     func dismissKeyBoardTapeGesture() {

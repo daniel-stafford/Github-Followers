@@ -15,6 +15,12 @@ class FollowersListVC: UIViewController {
         view.backgroundColor = .systemBackground
         // have to reset back to false due to config in SearchVC
         navigationController?.isNavigationBarHidden = false
-		navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    // addressing the bug between hiding/showing navbar between two different VCs (swiping back)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
