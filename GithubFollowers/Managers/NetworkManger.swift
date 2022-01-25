@@ -19,10 +19,10 @@ class NetworkManager {
     // completed = closure = completionHandler = callback
     // follower needs to be optional as could return error
     // In turn, the error would be a string
-    func getFollowers(for username: String, page: Int, completed: @escaping ([Follower]?, String?) -> Void) {
+    func getFollowers(for username: String, page: Int, completed: @escaping ([Follower]?, ErrorMessage?) -> Void) {
         let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\([perPageFollowers])"
         guard let url = URL(string: endpoint) else {
-            completed(nil, "This url created an invalid request, please try again")
+			completed(nil, ErrorMessage.invalidUsername)
             return
         }
 
@@ -31,16 +31,16 @@ class NetworkManager {
             // generally internet isn't corrected
             // general description but perhaps still better than error.localizedDescription
             if error != nil {
-                completed(nil, "Unable to complete your request. Please check your internet connection.")
+				completed(nil, ErrorMessage.unableToComplete )
                 return
             }
             // error in case of 404, 403, etc.
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completed(nil, "Invalid response from the server. Please try again.")
+				completed(nil, ErrorMessage.invalidResponse)
                 return
             }
             guard let data = data else {
-                completed(nil, "The data received from the server was invalid. Please try again.")
+				completed(nil, ErrorMessage.invalidData)
                 return
             }
             do {
@@ -50,8 +50,10 @@ class NetworkManager {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let followers = try decoder.decode([Follower].self, from: data)
                 completed(followers, nil)
-            } catch {
-                completed(nil, "The data received from the server was invalid. Please try again.")
+			} catch {
+				// errors from localizedDescription are often not user friendly and targeted toward devs, hence our custom errors
+				print("error!", error.localizedDescription)
+				completed(nil, ErrorMessage.invalidData)
             }
         }
         // 👀 Remember to resume the task! Easy to forget. Otherwise nothing will happen.
