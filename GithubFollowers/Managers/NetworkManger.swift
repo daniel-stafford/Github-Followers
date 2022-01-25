@@ -17,12 +17,12 @@ class NetworkManager {
     let perPageFollowers = 100
 
     // completed = closure = completionHandler = callback
-    // follower needs to be optional as could return error
-    // In turn, the error would be a string
-    func getFollowers(for username: String, page: Int, completed: @escaping ([Follower]?, ErrorMessage?) -> Void) {
+    // follower needs to be optional as could return error, in turn, the error would be a string
+    func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
         let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\([perPageFollowers])"
+
         guard let url = URL(string: endpoint) else {
-			completed(nil, ErrorMessage.invalidUsername)
+            completed(.failure(.invalidUsername))
             return
         }
 
@@ -31,29 +31,29 @@ class NetworkManager {
             // generally internet isn't corrected
             // general description but perhaps still better than error.localizedDescription
             if error != nil {
-				completed(nil, ErrorMessage.unableToComplete )
+                completed(.failure(.unableToComplete))
                 return
             }
             // error in case of 404, 403, etc.
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-				completed(nil, ErrorMessage.invalidResponse)
+                completed(.failure(.invalidResponse))
                 return
             }
             guard let data = data else {
-				completed(nil, ErrorMessage.invalidData)
+                completed(.failure(.invalidData))
                 return
             }
             do {
-				// from Swift 4.23 with Codable
+                // from Swift 4.23 with Codable
                 let decoder = JSONDecoder()
                 // allow from snake case
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let followers = try decoder.decode([Follower].self, from: data)
-                completed(followers, nil)
-			} catch {
-				// errors from localizedDescription are often not user friendly and targeted toward devs, hence our custom errors
-				print("error!", error.localizedDescription)
-				completed(nil, ErrorMessage.invalidData)
+                completed(.success(followers))
+            } catch {
+                // errors from localizedDescription are often not user friendly and targeted toward devs, hence our custom errors
+                print("error!", error.localizedDescription)
+                completed(.failure(.invalidData))
             }
         }
         // 👀 Remember to resume the task! Easy to forget. Otherwise nothing will happen.

@@ -9,7 +9,8 @@ import Foundation
 
 // Raw value is all cases conform to one type
 // Associated values is after each case
-enum ErrorMessage: String {
+// comform to error when using Result
+enum GFError: String, Error {
 	case invalidUsername = "This url created an invalid request, please try again."
 	case unableToComplete = "Unable to complete your request. Please check your internet connection."
 	case invalidResponse = "Invalid response from the server. Please try again."

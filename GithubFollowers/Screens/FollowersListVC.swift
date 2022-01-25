@@ -16,14 +16,17 @@ class FollowersListVC: UIViewController {
         // have to reset back to false due to config in SearchVC
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
-		// result will eventually fix the ambiguity of two optionals (followers vs. errorMessage)
-        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { [weak self] followers, errorMessage in
-            guard let followers = followers else {
-				// rawValue will gives us the string we need to pass into the alertVC
-				self?.presentGFAlertOnMainThread(alertTitle: "Error", message: errorMessage?.rawValue ?? "Something went wrong", buttonTitle: "OK")
-                return
+
+        // refactored to use result, no need to use unwrap optionals
+        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { result in
+
+            switch result {
+            case let .success(followers):
+                print("Number of followers:", followers.count)
+
+            case let .failure(error):
+                self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
-            print("Number of followers:", followers.count)
         })
     }
 
