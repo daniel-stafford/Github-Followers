@@ -76,6 +76,9 @@ class SearchVC: UIViewController {
 
     func configureUserNameTextField() {
         view.addSubview(usernameTextField)
+		usernameTextField.autocorrectionType = .no
+		usernameTextField.autocapitalizationType = .none
+		usernameTextField.spellCheckingType = .no
         // 👀 set the searchVC to listen for usernameTextField, easy to forget this!
         usernameTextField.delegate = self
 
