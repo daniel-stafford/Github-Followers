@@ -47,7 +47,7 @@ class SearchVC: UIViewController {
             let title = "Empty Username"
             let message = "Please enter a Github username, so we know who to look for! 😀"
             let buttonTitle = "OK"
-            presentGFAlertOnMainThread(title: title, message: message, buttonTitle: buttonTitle)
+            presentGFAlertOnMainThread(alertTitle: title, message: message, buttonTitle: buttonTitle)
             return
         }
         followersListVC.username = usernameTextField.text

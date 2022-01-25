@@ -16,6 +16,13 @@ class FollowersListVC: UIViewController {
         // have to reset back to false due to config in SearchVC
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
+        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { [weak self] followers, error in
+            guard let followers = followers else {
+				self?.presentGFAlertOnMainThread(alertTitle: "Error", message: error ?? "Something went wrong", buttonTitle: "OK")
+				return
+            }
+            print("Followers are", followers)
+        })
     }
 
     // addressing the bug between hiding/showing navbar between two different VCs (swiping back)

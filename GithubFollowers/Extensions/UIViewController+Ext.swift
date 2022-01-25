@@ -9,11 +9,11 @@
 import UIKit
 
 extension UIViewController {
-    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+    func presentGFAlertOnMainThread(alertTitle: String, message: String, buttonTitle: String) {
         // show on main thread since updating UI
         // no need for capture list, e.g. weak self
         DispatchQueue.main.async {
-            let alertVC = GFAlertVC(alertTitle: title, message: message, buttonTitle: buttonTitle)
+            let alertVC = GFAlertVC(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
             // doesn't show card view
             alertVC.modalPresentationStyle = .overFullScreen
             // fade in animation

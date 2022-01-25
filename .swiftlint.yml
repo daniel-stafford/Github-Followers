@@ -7,7 +7,6 @@ opt_in_rules:
   - toggle_bool
   - empty_string
   - fatal_error_message
-  - file_name
   - first_where
   - modifier_order
   - private_action
