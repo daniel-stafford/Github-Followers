@@ -31,8 +31,8 @@ class GFButton: UIButton {
     // private - as don't want to call outside of class
     private func configure() {
         layer.cornerRadius = 10
-        titleLabel?.textColor = .white
-        // we want to conform to dynamic type for default SF font
+		setTitleColor(.white, for: .normal)
+		// we want to conform to dynamic type for default SF font
         // beware of extra work with custom fonts
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         // autoLayout programmatically
