@@ -8,9 +8,19 @@
 import UIKit
 
 class FollowersListVC: UIViewController {
+    // enums are hashable by default
+    enum Section {
+        // we have only one section
+        case main
+    }
+
     var username: String!
-    // other function will have to access collectionView, so we're declaring as a property
+    var followers = [Follower]()
+
+    // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
+    // generic parameters need to conform to hashable, must know about our section(s) and items
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
     // tip - have viewDidLoad read like a list of functions, refactor all logic out when possible
     // it's like a table of contents for a book
@@ -19,6 +29,7 @@ class FollowersListVC: UIViewController {
         configureViewController()
         configureCollectionView()
         getFollowers()
+        configureDataSource()
     }
 
     // addressing the bug between hiding/showing navbar between two different VCs (swiping back)
@@ -41,11 +52,12 @@ class FollowersListVC: UIViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
         // pink for debugging
-        collectionView.backgroundColor = .systemPink
         collectionView.register(GFFollowerCell.self, forCellWithReuseIdentifier: GFFollowerCell.reuseID)
+		// default view was black
+		collectionView.backgroundColor = .systemBackground
     }
 
-	// this is going to be refactored out
+    // this is going to be refactored out
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
         // full width of screen
         let width = view.bounds.width
@@ -71,11 +83,35 @@ class FollowersListVC: UIViewController {
 
             switch result {
             case let .success(followers):
-                print("Number of followers:", followers.count)
-
+                self.followers = followers
+                self.updateData()
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
         })
+    }
+
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { collectionView, indexPath, follower in
+            // similar to storyboard flow of cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GFFollowerCell.reuseID, for: indexPath) as? GFFollowerCell
+            cell?.set(follower: follower)
+
+            return cell
+        })
+    }
+
+    // where snapshots take [;ace
+    func updateData() {
+        // snapshot
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        // converge to section
+        snapshot.appendSections([.main])
+        // convert item to section
+        snapshot.appendItems(followers, toSection: .main)
+        // the magic function to cause
+        // call on main thread just in case
+        // though WWDC says OK to call on background
+        DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
 }

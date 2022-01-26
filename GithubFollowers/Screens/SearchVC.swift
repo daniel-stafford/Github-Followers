@@ -19,7 +19,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // white for dark mode and vice versa
-        view.backgroundColor = .systemBackground
+		view.backgroundColor = .systemBackground
         configureLogoImageView()
         configureUserNameTextField()
         configureCallToActionButton()
