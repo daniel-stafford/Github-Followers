@@ -17,6 +17,7 @@ class GFAlertContainerView: UIView {
     }
 
     init() {
+		// zero = an edge insets struct whose top, left, bottom, and right fields are all set to 0.
         super.init(frame: .zero)
         configure()
     }
