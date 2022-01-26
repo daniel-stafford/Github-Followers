@@ -20,7 +20,6 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         // white for dark mode and vice versa
         view.backgroundColor = .systemBackground
-        // remember to call this!
         configureLogoImageView()
         configureUserNameTextField()
         configureCallToActionButton()

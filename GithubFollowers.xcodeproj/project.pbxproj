@@ -129,8 +129,8 @@
 		DDAD74C627A0807D000525A3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				DDAD74C727A080B7000525A3 /* GFFollowerCell.swift */,
 				DDAD74C927A08164000525A3 /* GFAvatarImageView.swift */,
+				DDAD74C727A080B7000525A3 /* GFFollowerCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -301,17 +301,17 @@
 			files = (
 				DD42C002279C05D200866672 /* AppDelegate.swift in Sources */,
 				DD42C018279C2AF400866672 /* FavoritesVC.swift in Sources */,
-				DDAD74CA27A08164000525A3 /* GFAvatarImageView.swift in Sources */,
 				DDAD74BD279EE52E000525A3 /* Follower.swift in Sources */,
 				DDE5EC61279C5F4F0011BE56 /* FollowersListVC.swift in Sources */,
 				DDE5EC6A279CB44D0011BE56 /* GFAlertContainerView.swift in Sources */,
 				DDE5EC68279CACB70011BE56 /* GFAlertVC.swift in Sources */,
+				DDAD74CA27A08164000525A3 /* GFAvatarImageView.swift in Sources */,
 				DDE5EC66279CA7300011BE56 /* GFBodyLabel.swift in Sources */,
 				DDE5EC5D279C3CE50011BE56 /* GFButton.swift in Sources */,
 				DDAD74C527A0092E000525A3 /* GFError.swift in Sources */,
+				DDAD74C827A080B7000525A3 /* GFFollowerCell.swift in Sources */,
 				DDE5EC5F279C451F0011BE56 /* GFTextField.swift in Sources */,
 				DDE5EC64279C95A40011BE56 /* GFTitleLabel.swift in Sources */,
-				DDAD74C827A080B7000525A3 /* GFFollowerCell.swift in Sources */,
 				DDAD74C2279EF7D9000525A3 /* NetworkManger.swift in Sources */,
 				DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */,
 				DD42C016279C2A9A00866672 /* SearchVC.swift in Sources */,
