@@ -26,6 +26,7 @@ class GFFollowerCell: UICollectionViewCell {
 	// func to fill in details.  Alternative to using init
     func set(follower: Follower) {
         usernameLabel.text = follower.login
+		avatarImageView.downloadImage(from: follower.avatarUrl)
     }
 
     private func configure() {

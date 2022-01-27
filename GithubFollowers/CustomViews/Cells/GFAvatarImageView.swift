@@ -27,4 +27,21 @@ class GFAvatarImageView: UIImageView {
         // placeholder image
         image = placeholderImage
     }
+
+    // downloading here and not network manager
+    func downloadImage(from urlString: String) {
+        // we're not handling errors as our placeholder functions as an error
+        guard let url = URL(string: urlString) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if error != nil { return }
+			print("starting task", url)
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+            guard let data = data else { return }
+            guard let image = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
+        task.resume()
+    }
 }
