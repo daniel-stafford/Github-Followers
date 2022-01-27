@@ -5,7 +5,7 @@
 //  Created by Daniel Stafford on 1/24/22.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     // create singleton
@@ -13,8 +13,10 @@ class NetworkManager {
     // make init private, so cannot be created outside
     private init() {}
 
-    let baseUrl = "https://api.github.com/users"
+    private let baseUrl = "https://api.github.com/users"
     let perPageFollowers = 100
+	// create a singular cache
+	let cache = NSCache<NSString, UIImage>()
 
     // completed = closure = completionHandler = callback
     // follower needs to be optional as could return error, in turn, the error would be a string
