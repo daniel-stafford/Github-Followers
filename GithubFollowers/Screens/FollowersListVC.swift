@@ -9,10 +9,8 @@ import UIKit
 
 class FollowersListVC: UIViewController {
     // enums are hashable by default
-    enum Section {
-        // we have only one section
-        case main
-    }
+    // we have only one section
+    enum Section { case main }
 
     var username: String!
     var followers = [Follower]()
@@ -20,8 +18,8 @@ class FollowersListVC: UIViewController {
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
     // generic parameters need to conform to hashable, must know about our section(s) and items
-	// diffable data is useful for dynamic content (e.g. wifi networks, searching through a list)
-	var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    // diffable data is useful for dynamic content (e.g. wifi networks, searching through a list)
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
     // tip - have viewDidLoad read like a list of functions, refactor all logic out when possible
     // it's like a table of contents for a book
@@ -50,8 +48,8 @@ class FollowersListVC: UIViewController {
         // initialize before adding as subview, as you can't add a nil as a subview
         // view.bounds = fill up whole view
         // collectionViewLayOut: UICollectionViewLayout() is default for now, will customize later
-		// TODO: Figure out why layout isn't working with iOS 15
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
+        // TODO: Figure out why layout isn't working with iOS 15
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
         // pink for debugging
         collectionView.register(GFFollowerCell.self, forCellWithReuseIdentifier: GFFollowerCell.reuseID)
@@ -59,29 +57,13 @@ class FollowersListVC: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
 
-    // this is going to be refactored out
-    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-        // full width of screen
-        let width = view.bounds.width
-        // UI edge insets
-        let padding: CGFloat = 12
-        // spacing between cells
-        let minimumItemSpacing: CGFloat = 10
-        let availableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
-        let itemWidth = availableWidth / 3
-
-        let flowLayout = UICollectionViewFlowLayout()
-        // could refactor to use extension
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        // make height dynamic + some space for the usernameLabel
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-
-        return flowLayout
-    }
-
     func getFollowers() {
         // refactored to use result, no need to use unwrap optionals
-        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { result in
+        // Memory leak risk, so use capture risk
+        // unowned force unwraps the self, little more dangerous than weak, used less
+        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { [weak self] result in
+            // unwrapping the optional of self, so no need for question marks, Swift 4.2
+            guard let self = self else { return }
 
             switch result {
             case let .success(followers):

@@ -27,6 +27,7 @@ class SearchVC: UIViewController {
     }
 
     // hide navBar in viewDidAppear as will get called on back navigation, viewDidLoad only gets called once!
+	// note: viewWillAppears doesn't necessarily mean the view is visible (could be hidden)
     override func viewWillAppear(_ animated: Bool) {
         // remember to call the super! Unless you don't want parent functionality
         super.viewWillAppear(animated)
