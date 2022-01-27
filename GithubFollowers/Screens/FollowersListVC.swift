@@ -20,7 +20,8 @@ class FollowersListVC: UIViewController {
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
     // generic parameters need to conform to hashable, must know about our section(s) and items
-    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+	// diffable data is useful for dynamic content (e.g. wifi networks, searching through a list)
+	var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
     // tip - have viewDidLoad read like a list of functions, refactor all logic out when possible
     // it's like a table of contents for a book
@@ -49,12 +50,13 @@ class FollowersListVC: UIViewController {
         // initialize before adding as subview, as you can't add a nil as a subview
         // view.bounds = fill up whole view
         // collectionViewLayOut: UICollectionViewLayout() is default for now, will customize later
+		// TODO: Figure out why layout isn't working with iOS 15
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         view.addSubview(collectionView)
         // pink for debugging
         collectionView.register(GFFollowerCell.self, forCellWithReuseIdentifier: GFFollowerCell.reuseID)
-		// default view was black
-		collectionView.backgroundColor = .systemBackground
+        // default view was black
+        collectionView.backgroundColor = .systemBackground
     }
 
     // this is going to be refactored out
@@ -103,7 +105,7 @@ class FollowersListVC: UIViewController {
 
     // where snapshots take [;ace
     func updateData() {
-        // snapshot
+        // snapshot goes through hash function to get unique value, diffable then tracks it
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         // converge to section
         snapshot.appendSections([.main])
