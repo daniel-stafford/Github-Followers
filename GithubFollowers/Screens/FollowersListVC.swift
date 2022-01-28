@@ -13,8 +13,8 @@ class FollowersListVC: UIViewController {
     enum Section { case main }
 
     var username: String!
-	var followers = [Follower]()
-	
+    var followers = [Follower]()
+
     var page = 1
     var hasMoreFollowers = true
 
@@ -66,16 +66,18 @@ class FollowersListVC: UIViewController {
         // refactored to use result, no need to use unwrap optionals
         // Memory leak risk, so use capture risk
         // unowned force unwraps the self, little more dangerous than weak, used less
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page, completed: { [weak self] result in
             // unwrapping the optional of self, so no need for question marks, Swift 4.2
-            guard let self = self else { return }
+			guard let self = self else { return }
+			self.dismissLoadingView()
 
             switch result {
             case let .success(followers):
-				//TODO: Replace 100 with global constant (followersPerPage?)
-				if followers.count < 100 { self.hasMoreFollowers.toggle() }
-				//  alternative to self.followers += followers
-				self.followers.append(contentsOf: followers)
+                // TODO: Replace 100 with global constant (followersPerPage?)
+                if followers.count < 100 { self.hasMoreFollowers.toggle() }
+                //  alternative to self.followers += followers
+                self.followers.append(contentsOf: followers)
                 self.updateData()
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
@@ -120,7 +122,7 @@ extension FollowersListVC: UICollectionViewDelegate {
         let height = scrollView.frame.size.height
         //		print("offsetY", offsetY, "contentHeight", contentHeight, "height", height)
         if offsetY > contentHeight - height {
-			guard hasMoreFollowers else { return }
+            guard hasMoreFollowers else { return }
             page += 1
             getFollowers(username: username, page: page)
         }
