@@ -21,7 +21,7 @@ class NetworkManager {
     // completed = closure = completionHandler = callback
     // follower needs to be optional as could return error, in turn, the error would be a string
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
-        let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\([perPageFollowers])"
+        let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\(perPageFollowers)"
 
         guard let url = URL(string: endpoint) else {
             completed(.failure(.invalidUsername))

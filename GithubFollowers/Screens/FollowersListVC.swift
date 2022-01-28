@@ -13,7 +13,10 @@ class FollowersListVC: UIViewController {
     enum Section { case main }
 
     var username: String!
-    var followers = [Follower]()
+	var followers = [Follower]()
+	
+    var page = 1
+    var hasMoreFollowers = true
 
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
@@ -27,7 +30,7 @@ class FollowersListVC: UIViewController {
         super.viewDidLoad()
         configureViewController()
         configureCollectionView()
-        getFollowers()
+        getFollowers(username: username, page: page)
         configureDataSource()
     }
 
@@ -51,23 +54,28 @@ class FollowersListVC: UIViewController {
         // TODO: Figure out why layout isn't working with iOS 15
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
+        // register the delegate, tell it to listen to the collectionView
+        collectionView.delegate = self
         // pink for debugging
         collectionView.register(GFFollowerCell.self, forCellWithReuseIdentifier: GFFollowerCell.reuseID)
         // default view was black
         collectionView.backgroundColor = .systemBackground
     }
 
-    func getFollowers() {
+    func getFollowers(username: String, page: Int) {
         // refactored to use result, no need to use unwrap optionals
         // Memory leak risk, so use capture risk
         // unowned force unwraps the self, little more dangerous than weak, used less
-        NetworkManager.shared.getFollowers(for: username, page: 1, completed: { [weak self] result in
+        NetworkManager.shared.getFollowers(for: username, page: page, completed: { [weak self] result in
             // unwrapping the optional of self, so no need for question marks, Swift 4.2
             guard let self = self else { return }
 
             switch result {
             case let .success(followers):
-                self.followers = followers
+				//TODO: Replace 100 with global constant (followersPerPage?)
+				if followers.count < 100 { self.hasMoreFollowers.toggle() }
+				//  alternative to self.followers += followers
+				self.followers.append(contentsOf: followers)
                 self.updateData()
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
@@ -93,9 +101,28 @@ class FollowersListVC: UIViewController {
         snapshot.appendSections([.main])
         // convert item to section
         snapshot.appendItems(followers, toSection: .main)
-        // the magic function to cause
+        // the apply function to start the diff
         // call on main thread just in case
         // though WWDC says OK to call on background
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
+    }
+}
+
+// UICollectionViewDelegate gives scrollview delegate as well as didSelect
+// remember - delegates wait fir us to do something
+extension FollowersListVC: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // we want the up and down coordinates (would x if you had a horizontal scrollview)
+        let offsetY = scrollView.contentOffset.y
+        //  get the height of the entire scroll view (all 100 followers)
+        let contentHeight = scrollView.contentSize.height
+        // get height of the screen
+        let height = scrollView.frame.size.height
+        //		print("offsetY", offsetY, "contentHeight", contentHeight, "height", height)
+        if offsetY > contentHeight - height {
+			guard hasMoreFollowers else { return }
+            page += 1
+            getFollowers(username: username, page: page)
+        }
     }
 }

@@ -42,6 +42,8 @@ class GFTextField: UITextField {
 		// change return key text
 		returnKeyType = .go
 
-		placeholder = "Enter a username"
+//		placeholder = "Enter a username"
+		// TODO: delete this when not testing
+		text = "Egoist"
     }
 }

@@ -34,7 +34,6 @@ class GFAvatarImageView: UIImageView {
 		// check cache for image and if there is one, set it and exit
 		let cacheKey = NSString(string: urlString)
 		if let image = cache.object(forKey: cacheKey) {
-			print(cacheKey, "in the cache!")
 			self.image = image
 			return
 		}
@@ -48,7 +47,6 @@ class GFAvatarImageView: UIImageView {
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
-			print("downloading", cacheKey)
 			// write image to cache, similar to userDefaults forKey
 			self.cache.setObject(image, forKey: cacheKey)
 			// back to main thread and set image
