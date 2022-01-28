@@ -14,7 +14,7 @@ class FollowersListVC: UIViewController {
 
     var username: String!
     var followers = [Follower]()
-
+	
     var page = 1
     var hasMoreFollowers = true
 
@@ -74,10 +74,14 @@ class FollowersListVC: UIViewController {
 
             switch result {
             case let .success(followers):
-                // TODO: Replace 100 with global constant (followersPerPage?)
-                if followers.count < 100 { self.hasMoreFollowers.toggle() }
+				if followers.count < Constants.maxFollowersPerPage { self.hasMoreFollowers.toggle() }
                 //  alternative to self.followers += followers
                 self.followers.append(contentsOf: followers)
+				if followers.isEmpty {
+					let message = "This user doesn't have any Github followers. Go follow them! 😃"
+					self.showEmptyStateView(with: message, in: self.view)
+					return
+				}
                 self.updateData()
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")

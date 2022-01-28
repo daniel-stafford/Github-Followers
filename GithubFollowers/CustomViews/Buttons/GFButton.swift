@@ -13,6 +13,7 @@ class GFButton: UIButton {
     override init(frame: CGRect) {
         // build on top of existing class
         super.init(frame: frame)
+		configure()
     }
 
     // gets called when initializing via storyboard

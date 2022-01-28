@@ -14,14 +14,13 @@ class NetworkManager {
     private init() {}
 
     private let baseUrl = "https://api.github.com/users"
-    let perPageFollowers = 100
 	// create a singular cache
 	let cache = NSCache<NSString, UIImage>()
 
     // completed = closure = completionHandler = callback
     // follower needs to be optional as could return error, in turn, the error would be a string
     func getFollowers(for username: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
-        let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\(perPageFollowers)"
+		let endpoint = baseUrl + "/\(username)/followers?page=\(page)&per_page=\(Constants.maxFollowersPerPage)"
 
         guard let url = URL(string: endpoint) else {
             completed(.failure(.invalidUsername))
