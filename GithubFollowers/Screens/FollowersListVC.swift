@@ -14,7 +14,8 @@ class FollowersListVC: UIViewController {
 
     var username: String!
     var followers = [Follower]()
-	
+    var filteredFollowers = [Follower]()
+
     var page = 1
     var hasMoreFollowers = true
 
@@ -30,6 +31,7 @@ class FollowersListVC: UIViewController {
         super.viewDidLoad()
         configureViewController()
         configureCollectionView()
+        configureSearchController()
         getFollowers(username: username, page: page)
         configureDataSource()
     }
@@ -38,6 +40,14 @@ class FollowersListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+		// show searchBar upon appearing
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+		// hide when scrolling
+        navigationItem.hidesSearchBarWhenScrolling = true
     }
 
     func configureViewController() {
@@ -62,6 +72,19 @@ class FollowersListVC: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
 
+    func configureSearchController() {
+        let searchController = UISearchController()
+        // set search delegate to self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search for a username"
+        // show search without having to scroll down
+        // prevent faint overlay
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.isActive = true
+        navigationItem.searchController = searchController
+    }
+
     func getFollowers(username: String, page: Int) {
         // refactored to use result, no need to use unwrap optionals
         // Memory leak risk, so use capture risk
@@ -69,20 +92,20 @@ class FollowersListVC: UIViewController {
         showLoadingView()
         NetworkManager.shared.getFollowers(for: username, page: page, completed: { [weak self] result in
             // unwrapping the optional of self, so no need for question marks, Swift 4.2
-			guard let self = self else { return }
-			self.dismissLoadingView()
+            guard let self = self else { return }
+            self.dismissLoadingView()
 
             switch result {
             case let .success(followers):
-				if followers.count < Constants.maxFollowersPerPage { self.hasMoreFollowers.toggle() }
+                if followers.count < Constants.maxFollowersPerPage { self.hasMoreFollowers.toggle() }
                 //  alternative to self.followers += followers
                 self.followers.append(contentsOf: followers)
-				if followers.isEmpty {
-					let message = "This user doesn't have any Github followers. Go follow them! 😃"
-					self.showEmptyStateView(with: message, in: self.view)
-					return
-				}
-                self.updateData()
+                if followers.isEmpty {
+                    let message = "This user doesn't have any Github followers. Go follow them! 😃"
+                    self.showEmptyStateView(with: message, in: self.view)
+                    return
+                }
+                self.updateData(on: self.followers)
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
@@ -100,7 +123,7 @@ class FollowersListVC: UIViewController {
     }
 
     // where snapshots take [;ace
-    func updateData() {
+    func updateData(on followers: [Follower]) {
         // snapshot goes through hash function to get unique value, diffable then tracks it
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         // converge to section
@@ -130,5 +153,19 @@ extension FollowersListVC: UICollectionViewDelegate {
             page += 1
             getFollowers(username: username, page: page)
         }
+    }
+}
+
+// worth grouping delegate extensions
+extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        // user input inside search bar is unwrapped and not empty
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
+        updateData(on: filteredFollowers)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: followers)
     }
 }

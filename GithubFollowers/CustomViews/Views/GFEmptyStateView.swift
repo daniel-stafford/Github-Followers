@@ -19,12 +19,12 @@ class GFEmptyStateView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-	
-	init(message: String) {
-		super.init(frame: .zero)
-		messageLabel.text = message
-		configure()
-	}
+
+    init(message: String) {
+        super.init(frame: .zero)
+        messageLabel.text = message
+        configure()
+    }
 
     private func configure() {
         addSubview(messageLabel)
@@ -49,7 +49,7 @@ class GFEmptyStateView: UIView {
             logoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.3),
             // pushing image to right, so no negative
             logoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 170),
-			// push down, so again no negative
+            // push down, so again no negative
             logoImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 40),
         ])
     }
