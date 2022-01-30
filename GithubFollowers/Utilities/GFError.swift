@@ -1,12 +1,13 @@
 //
-//  ErrorMessage.swift
+//  GFError.swift
 //  GithubFollowers
 //
-//  Created by Daniel Stafford on 1/25/22.
+//  Created by Daniel Stafford on 1/30/22.
 //
 
 import Foundation
 
+// since we renamed this enum, created a new file to avoid any pathing issues
 // Raw value is all cases conform to one type
 // Associated values is after each case
 // comform to error when using Result
