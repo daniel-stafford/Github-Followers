@@ -18,6 +18,7 @@ class FollowersListVC: UIViewController {
 
     var page = 1
     var hasMoreFollowers = true
+    var isSearching = false 
 
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
@@ -40,13 +41,13 @@ class FollowersListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-		// show searchBar upon appearing
+        // show searchBar upon appearing
         navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-		// hide when scrolling
+        // hide when scrolling
         navigationItem.hidesSearchBarWhenScrolling = true
     }
 
@@ -81,7 +82,6 @@ class FollowersListVC: UIViewController {
         // show search without having to scroll down
         // prevent faint overlay
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.isActive = true
         navigationItem.searchController = searchController
     }
 
@@ -154,6 +154,15 @@ extension FollowersListVC: UICollectionViewDelegate {
             getFollowers(username: username, page: page)
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let follower = !isSearching ? followers[indexPath.item] : filteredFollowers[indexPath.item]
+        print(follower.login)
+		let desVC = UserInfoVC()
+		desVC.username = follower.login
+		let navController = UINavigationController(rootViewController: desVC)
+		present(navController, animated: true)
+	}
 }
 
 // worth grouping delegate extensions
@@ -161,11 +170,13 @@ extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         // user input inside search bar is unwrapped and not empty
         guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         updateData(on: followers)
+        isSearching = false
     }
 }
