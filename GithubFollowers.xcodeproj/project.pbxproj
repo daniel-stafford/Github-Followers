@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD2172DF27ABE55C0072ECEC /* GFUserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */; };
 		DD2172E127ABF4D40072ECEC /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2172E027ABF4D40072ECEC /* GFSecondaryTitleLabel.swift */; };
+		DD39872227AD9B5B003FAB05 /* GFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */; };
 		DD41E10627A2C44B00EA7206 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41E10527A2C44B00EA7206 /* UIHelper.swift */; };
 		DD42C002279C05D200866672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C001279C05D200866672 /* AppDelegate.swift */; };
 		DD42C004279C05D200866672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD42C003279C05D200866672 /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFUserInfoHeader.swift; sourceTree = "<group>"; };
 		DD2172E027ABF4D40072ECEC /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
+		DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GFItemInfoView.swift; path = GithubFollowers/CustomViews/Views/GFItemInfoView.swift; sourceTree = "<group>"; };
 		DD41E10527A2C44B00EA7206 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		DD42BFFE279C05D200866672 /* GithubFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD42C001279C05D200866672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		DD42BFF5279C05D200866672 = {
 			isa = PBXGroup;
 			children = (
+				DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */,
 				DDE5EC73279D619F0011BE56 /* Scripts */,
 				DD42C000279C05D200866672 /* GithubFollowers */,
 				DD42BFFF279C05D200866672 /* Products */,
@@ -378,6 +381,7 @@
 				DD85396527A46612002098B8 /* GFEmptyStateView.swift in Sources */,
 				DDE5CF1327A71CD500A2B460 /* GFError.swift in Sources */,
 				DDAD74C827A080B7000525A3 /* GFFollowerCell.swift in Sources */,
+				DD39872227AD9B5B003FAB05 /* GFItemInfoView.swift in Sources */,
 				DD2172E127ABF4D40072ECEC /* GFSecondaryTitleLabel.swift in Sources */,
 				DDE5EC5F279C451F0011BE56 /* GFTextField.swift in Sources */,
 				DDE5EC64279C95A40011BE56 /* GFTitleLabel.swift in Sources */,
