@@ -54,7 +54,7 @@ extension UIViewController {
 
     func dismissLoadingView() {
         DispatchQueue.main.async {
-            containerView.removeFromSuperview()
+            containerView?.removeFromSuperview()
             // remove from memory, release any references
             containerView = nil
         }
