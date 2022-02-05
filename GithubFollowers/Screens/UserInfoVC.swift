@@ -35,7 +35,11 @@ class UserInfoVC: UIViewController {
 
             switch result {
             case let .success(user):
-                DispatchQueue.main.async { self.addChildVC(childVC: GFUserInfoHeader(user: user), to: self.headerView) }
+                DispatchQueue.main.async {
+                    self.add(childVC: GFUserInfoHeader(user: user), to: self.headerView)
+                    self.add(childVC: GFRepoItemVC(user: user), to: self.itemViewOne)
+                    self.add(childVC: GFFollowerItemVC(user: user), to: self.itemViewTwo)
+                }
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
@@ -57,9 +61,6 @@ class UserInfoVC: UIViewController {
             ])
         }
 
-        itemViewOne.backgroundColor = .systemPink
-        itemViewTwo.backgroundColor = .systemRed
-
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 180),
@@ -72,7 +73,7 @@ class UserInfoVC: UIViewController {
         ])
     }
 
-    func addChildVC(childVC: UIViewController, to containerView: UIView) {
+    func add(childVC: UIViewController, to containerView: UIView) {
         addChild(childVC)
         containerView.addSubview(childVC.view)
         // fill up entire container view

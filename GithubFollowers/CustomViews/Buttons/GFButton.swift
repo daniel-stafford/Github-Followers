@@ -13,7 +13,7 @@ class GFButton: UIButton {
     override init(frame: CGRect) {
         // build on top of existing class
         super.init(frame: frame)
-		configure()
+        configure()
     }
 
     // gets called when initializing via storyboard
@@ -32,11 +32,17 @@ class GFButton: UIButton {
     // private - as don't want to call outside of class
     private func configure() {
         layer.cornerRadius = 10
-		setTitleColor(.white, for: .normal)
-		// we want to conform to dynamic type for default SF font
+        setTitleColor(.white, for: .normal)
+        // we want to conform to dynamic type for default SF font
         // beware of extra work with custom fonts
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         // autoLayout programmatically
         translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    // allows us to change on the fly vs. more inflexible init method
+    func set(backgroundColor: UIColor, title: String) {
+        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
     }
 }

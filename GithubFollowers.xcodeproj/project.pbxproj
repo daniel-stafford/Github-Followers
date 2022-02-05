@@ -25,6 +25,8 @@
 		DDAD74C827A080B7000525A3 /* GFFollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD74C727A080B7000525A3 /* GFFollowerCell.swift */; };
 		DDAD74CA27A08164000525A3 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD74C927A08164000525A3 /* GFAvatarImageView.swift */; };
 		DDC34DD227AE8D7A002006EF /* GFItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC34DD127AE8D7A002006EF /* GFItemInfoVC.swift */; };
+		DDC34DD427AEA527002006EF /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC34DD327AEA527002006EF /* GFRepoItemVC.swift */; };
+		DDC34DD627AF022F002006EF /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC34DD527AF022F002006EF /* GFFollowerItemVC.swift */; };
 		DDE5CF1127A6A3D900A2B460 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5CF1027A6A3D900A2B460 /* UserInfoVC.swift */; };
 		DDE5CF1327A71CD500A2B460 /* GFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5CF1227A71CD500A2B460 /* GFError.swift */; };
 		DDE5EC5D279C3CE50011BE56 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EC5C279C3CE50011BE56 /* GFButton.swift */; };
@@ -42,7 +44,7 @@
 /* Begin PBXFileReference section */
 		DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFUserInfoHeader.swift; sourceTree = "<group>"; };
 		DD2172E027ABF4D40072ECEC /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
-		DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GFItemInfoView.swift; path = GithubFollowers/CustomViews/Views/GFItemInfoView.swift; sourceTree = "<group>"; };
+		DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoView.swift; sourceTree = "<group>"; };
 		DD41E10527A2C44B00EA7206 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		DD42BFFE279C05D200866672 /* GithubFollowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubFollowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD42C001279C05D200866672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,8 @@
 		DDAD74C727A080B7000525A3 /* GFFollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerCell.swift; sourceTree = "<group>"; };
 		DDAD74C927A08164000525A3 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		DDC34DD127AE8D7A002006EF /* GFItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoVC.swift; sourceTree = "<group>"; };
+		DDC34DD327AEA527002006EF /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
+		DDC34DD527AF022F002006EF /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GFFollowerItemVC.swift; path = GithubFollowers/CustomViews/ViewControllers/ItemInfoVCs/GFFollowerItemVC.swift; sourceTree = SOURCE_ROOT; };
 		DDE5CF1027A6A3D900A2B460 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		DDE5CF1227A71CD500A2B460 /* GFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFError.swift; sourceTree = "<group>"; };
 		DDE5EC5C279C3CE50011BE56 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
@@ -88,7 +92,6 @@
 		DD42BFF5279C05D200866672 = {
 			isa = PBXGroup;
 			children = (
-				DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */,
 				DDE5EC73279D619F0011BE56 /* Scripts */,
 				DD42C000279C05D200866672 /* GithubFollowers */,
 				DD42BFFF279C05D200866672 /* Products */,
@@ -154,8 +157,8 @@
 		DD85396227A44686002098B8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDC34DD727AF0303002006EF /* ItemInfoVCs */,
 				DDE5EC67279CACB70011BE56 /* GFAlertVC.swift */,
-				DDC34DD127AE8D7A002006EF /* GFItemInfoVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -203,6 +206,17 @@
 				DDAD74C727A080B7000525A3 /* GFFollowerCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		DDC34DD727AF0303002006EF /* ItemInfoVCs */ = {
+			isa = PBXGroup;
+			children = (
+				DDC34DD527AF022F002006EF /* GFFollowerItemVC.swift */,
+				DDC34DD127AE8D7A002006EF /* GFItemInfoVC.swift */,
+				DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */,
+				DDC34DD327AEA527002006EF /* GFRepoItemVC.swift */,
+			);
+			path = ItemInfoVCs;
 			sourceTree = "<group>";
 		};
 		DDE5EC6F279D5EA00011BE56 /* Screens */ = {
@@ -380,12 +394,14 @@
 				DDE5EC68279CACB70011BE56 /* GFAlertVC.swift in Sources */,
 				DDAD74CA27A08164000525A3 /* GFAvatarImageView.swift in Sources */,
 				DDE5EC66279CA7300011BE56 /* GFBodyLabel.swift in Sources */,
-				DDC34DD227AE8D7A002006EF /* GFItemInfoVC.swift in Sources */,
 				DDE5EC5D279C3CE50011BE56 /* GFButton.swift in Sources */,
 				DD85396527A46612002098B8 /* GFEmptyStateView.swift in Sources */,
 				DDE5CF1327A71CD500A2B460 /* GFError.swift in Sources */,
 				DDAD74C827A080B7000525A3 /* GFFollowerCell.swift in Sources */,
+				DDC34DD627AF022F002006EF /* GFFollowerItemVC.swift in Sources */,
+				DDC34DD227AE8D7A002006EF /* GFItemInfoVC.swift in Sources */,
 				DD39872227AD9B5B003FAB05 /* GFItemInfoView.swift in Sources */,
+				DDC34DD427AEA527002006EF /* GFRepoItemVC.swift in Sources */,
 				DD2172E127ABF4D40072ECEC /* GFSecondaryTitleLabel.swift in Sources */,
 				DDE5EC5F279C451F0011BE56 /* GFTextField.swift in Sources */,
 				DDE5EC64279C95A40011BE56 /* GFTitleLabel.swift in Sources */,

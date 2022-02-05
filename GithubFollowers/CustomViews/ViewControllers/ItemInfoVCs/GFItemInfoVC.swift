@@ -15,28 +15,39 @@ class GFItemInfoVC: UIViewController {
     // don't initialize backgroundColor, text, etc. in superclass, rather in each subclass
     let actionButton = GFButton()
 
+    var user: User!
+
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundView()
         layoutUI()
-		configureStackView()
-	}
+        configureStackView()
+    }
 
     private func configureBackgroundView() {
         view.layer.cornerRadius = 15
         view.backgroundColor = .secondarySystemBackground
     }
-	
-	private func configureStackView(){
-		stackView.axis = .horizontal
-		stackView.distribution = .equalSpacing
-		// spacing between stackView.spacing is a property as well
-		
-		stackView.addArrangedSubview(itemInfoViewOne)
-		stackView.addArrangedSubview(itemInfoViewTwo)
-	}
 
-	// again, nice to leave this toward bottom, deal with logic higher up
+    private func configureStackView() {
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        // spacing between stackView.spacing is a property as well
+
+        stackView.addArrangedSubview(itemInfoViewOne)
+        stackView.addArrangedSubview(itemInfoViewTwo)
+    }
+
+    // again, nice to leave this toward bottom, deal with logic higher up
     private func layoutUI() {
         // no need to add itemInfoViewOne/Two as they will be added via stack view
         view.addSubview(stackView)
