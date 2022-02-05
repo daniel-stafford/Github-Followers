@@ -62,11 +62,9 @@ class GFItemInfoView: UIView {
         case .gists:
             symbolImageView.image = UIImage(systemName: SFSymbols.gists)
             titleLabel.text = "Public Gists"
-
         case .followers:
             symbolImageView.image = UIImage(systemName: SFSymbols.followers)
             titleLabel.text = "Followers"
-
         case .following:
             symbolImageView.image = UIImage(systemName: SFSymbols.following)
             titleLabel.text = "Following"
