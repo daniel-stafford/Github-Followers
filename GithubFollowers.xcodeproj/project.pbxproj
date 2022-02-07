@@ -130,6 +130,8 @@
 			children = (
 				DDE5EC69279CB44D0011BE56 /* GFAlertContainerView.swift */,
 				DD85396427A46612002098B8 /* GFEmptyStateView.swift */,
+				DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */,
+				DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,7 +219,6 @@
 			children = (
 				DDC34DD527AF022F002006EF /* GFFollowerItemVC.swift */,
 				DDC34DD127AE8D7A002006EF /* GFItemInfoVC.swift */,
-				DD39872127AD9B5B003FAB05 /* GFItemInfoView.swift */,
 				DDC34DD327AEA527002006EF /* GFRepoItemVC.swift */,
 			);
 			path = ItemInfoVCs;
@@ -228,7 +229,6 @@
 			children = (
 				DD42C017279C2AF400866672 /* FavoritesVC.swift */,
 				DDE5EC60279C5F4F0011BE56 /* FollowersListVC.swift */,
-				DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */,
 				DD42C015279C2A9A00866672 /* SearchVC.swift */,
 				DDE5CF1027A6A3D900A2B460 /* UserInfoVC.swift */,
 			);
