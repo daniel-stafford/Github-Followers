@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FollowerListVCDelegate: AnyObject {
+    func didRequestFollowers(for username: String)
+}
+
 class FollowersListVC: UIViewController {
     // enums are hashable by default
     // we have only one section
@@ -18,7 +22,7 @@ class FollowersListVC: UIViewController {
 
     var page = 1
     var hasMoreFollowers = true
-    var isSearching = false 
+    var isSearching = false
 
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
@@ -138,7 +142,7 @@ class FollowersListVC: UIViewController {
 }
 
 // UICollectionViewDelegate gives scrollview delegate as well as didSelect
-// remember - delegates wait fir us to do something
+// remember - delegates wait for us to do something
 extension FollowersListVC: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         // we want the up and down coordinates (would x if you had a horizontal scrollview)
@@ -147,7 +151,6 @@ extension FollowersListVC: UICollectionViewDelegate {
         let contentHeight = scrollView.contentSize.height
         // get height of the screen
         let height = scrollView.frame.size.height
-        //		print("offsetY", offsetY, "contentHeight", contentHeight, "height", height)
         if offsetY > contentHeight - height {
             guard hasMoreFollowers else { return }
             page += 1
@@ -157,12 +160,13 @@ extension FollowersListVC: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let follower = !isSearching ? followers[indexPath.item] : filteredFollowers[indexPath.item]
-        print(follower.login)
-		let desVC = UserInfoVC()
-		desVC.username = follower.login
-		let navController = UINavigationController(rootViewController: desVC)
-		present(navController, animated: true)
-	}
+        let desVC = UserInfoVC()
+        desVC.username = follower.login
+        // followers is now listening to user info modal
+        desVC.delegate = self
+        let navController = UINavigationController(rootViewController: desVC)
+        present(navController, animated: true)
+    }
 }
 
 // worth grouping delegate extensions
@@ -178,5 +182,21 @@ extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         updateData(on: followers)
         isSearching = false
+    }
+
+    func resetScreen(_ username: String) {
+        title = username
+        page = 1
+        followers.removeAll()
+        filteredFollowers.removeAll()
+        collectionView.setContentOffset(.zero, animated: true)
+    }
+}
+
+extension FollowersListVC: FollowerListVCDelegate {
+    func didRequestFollowers(for username: String) {
+        self.username = username
+        resetScreen(username)
+        getFollowers(username: username, page: page)
     }
 }

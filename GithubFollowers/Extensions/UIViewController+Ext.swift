@@ -7,6 +7,7 @@
 
 // no need to import Foundation, it's included in UIKit
 import UIKit
+import SafariServices
 // workaround for creating a variable inside an extension
 // it's "global" but contained within this file
 fileprivate var containerView: UIView!
@@ -65,4 +66,10 @@ extension UIViewController {
         emptyStateView.frame = view.bounds
         DispatchQueue.main.async { view.addSubview(emptyStateView) }
     }
+	
+	func presentSafariVC(with url: URL) {
+		let safariVC = SFSafariViewController(url: url)
+		safariVC.preferredControlTintColor = .systemGreen
+		present(safariVC, animated: true)
+	}
 }
