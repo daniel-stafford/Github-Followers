@@ -60,6 +60,12 @@ class FollowersListVC: UIViewController {
         // have to reset back to false due to config in SearchVC
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
+        let addFollower = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFollower))
+        navigationItem.rightBarButtonItem = addFollower
+    }
+
+    @objc func addFollower() {
+        print("add follower")
     }
 
     func configureCollectionView() {
