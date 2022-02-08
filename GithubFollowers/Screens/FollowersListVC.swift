@@ -60,12 +60,8 @@ class FollowersListVC: UIViewController {
         // have to reset back to false due to config in SearchVC
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
-        let addFollower = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFollower))
-        navigationItem.rightBarButtonItem = addFollower
-    }
-
-    @objc func addFollower() {
-        print("add follower")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
 
     func configureCollectionView() {
@@ -145,6 +141,11 @@ class FollowersListVC: UIViewController {
         // though WWDC says OK to call on background
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
+	
+	@objc func addButtonTapped() {
+		print("add button tapped")
+	}
+
 }
 
 // UICollectionViewDelegate gives scrollview delegate as well as didSelect
