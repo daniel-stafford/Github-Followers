@@ -141,11 +141,29 @@ class FollowersListVC: UIViewController {
         // though WWDC says OK to call on background
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
-	
-	@objc func addButtonTapped() {
-		print("add button tapped")
-	}
 
+    @objc func addButtonTapped() {
+        showLoadingView()
+        NetworkManager.shared.getUserInfo(for: username, completed: { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            switch result {
+            case let .success(user):
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+					guard let self = self else { return }
+                    guard let error = error else {
+						self.presentGFAlertOnMainThread(alertTitle: "Success", message: "Added \(self.username ?? "this user") to favorites.", buttonTitle: "OK")
+						return
+                    }
+                    self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
+                }
+
+            case let .failure(error):
+                self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
+            }
+        })
+    }
 }
 
 // UICollectionViewDelegate gives scrollview delegate as well as didSelect
