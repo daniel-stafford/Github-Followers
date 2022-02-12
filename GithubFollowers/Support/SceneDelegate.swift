@@ -19,43 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // assign our window's windowScene to delegate's windowScene
         window?.windowScene = windowScene
         // set up root controller
-        window?.rootViewController = createTabBar()
+        window?.rootViewController = GFTabBarController()
         // make visible
         window?.makeKeyAndVisible()
-		// change tint
-		configureNavigationBar()
+        // change tint
+        configureNavigationBar()
     }
 
-    func createSearchNC() -> UINavigationController {
-        let searchVC = SearchVC()
-        searchVC.title = "Search"
-        // tag = 0, first on left
-        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-
-        return UINavigationController(rootViewController: searchVC)
-    }
-
-    // if you have to crate a function that takes a ton of parameters , not worth doing DRY
-    func createFavoritesNC() -> UINavigationController {
-        let favoritesVC = FavoritesVC()
-        favoritesVC.title = "Favorites"
-        // tag: 1, first on right
-        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-
-        // remember to use L (local variable) vs C class for favoritesVC
-        return UINavigationController(rootViewController: favoritesVC)
-    }
-
-    func createTabBar() -> UITabBarController {
-        let tabBar = UITabBarController()
-        // change tab bar tint color system wise
-        UITabBar.appearance().tintColor = .systemGreen
-        tabBar.viewControllers = [createSearchNC(), createFavoritesNC()]
-
-        return tabBar
-    }
-
-    func configureNavigationBar() {
+     func configureNavigationBar() {
         UINavigationBar.appearance().tintColor = .systemGreen
     }
 
