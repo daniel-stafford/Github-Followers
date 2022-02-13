@@ -18,11 +18,11 @@ enum Images {
 }
 
 enum SFSymbols {
-    static let location = "mappin.and.ellipse"
-    static let repos = "folder"
-    static let gists = "text.alignleft"
-    static let followers = "heart"
-    static let following = "person.2"
+    static let location = UIImage(named: "mappin.and.ellipse")
+    static let repos = UIImage(named: "folder")
+    static let gists = UIImage(named: "text.alignleft")
+    static let followers = UIImage(named: "heart")
+    static let following = UIImage(named: "person.2")
 }
 
 // get screen size
