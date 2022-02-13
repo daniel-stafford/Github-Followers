@@ -17,12 +17,6 @@ class GFAlertContainerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init() {
-		// zero = an edge insets struct whose top, left, bottom, and right fields are all set to 0.
-        super.init(frame: .zero)
-        configure()
-    }
-
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .systemBackground
