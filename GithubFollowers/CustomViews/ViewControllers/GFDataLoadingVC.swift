@@ -31,7 +31,7 @@ class GFDataLoadingVC: UIViewController {
 
         // gives size, so only need to set horizontally and vertically
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        containerView.addSubview(activityIndicator)
+        view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 
         // centered on screen
