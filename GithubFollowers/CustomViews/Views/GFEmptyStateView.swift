@@ -34,7 +34,7 @@ class GFEmptyStateView: UIView {
         // slightly faded color
         messageLabel.textColor = .secondaryLabel
 
-        logoImageView.image = UIImage(named: Constants.emptyStateLogo)
+		logoImageView.image = Images.emptyStateLogo
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([

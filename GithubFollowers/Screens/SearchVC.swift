@@ -13,13 +13,14 @@ class SearchVC: UIViewController {
     let usernameTextField = GFTextField()
     // try to keep names generic
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    var logoImageViewTopConstraint: NSLayoutConstraint!
 
     var isUsernameEntered: Bool { !(usernameTextField.text?.isEmpty ?? false) }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // white for dark mode and vice versa
-		view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
         configureLogoImageView()
         configureUserNameTextField()
         configureCallToActionButton()
@@ -27,10 +28,12 @@ class SearchVC: UIViewController {
     }
 
     // hide navBar in viewDidAppear as will get called on back navigation, viewDidLoad only gets called once!
-	// note: viewWillAppears doesn't necessarily mean the view is visible (could be hidden)
+    // note: viewWillAppears doesn't necessarily mean the view is visible (could be hidden)
     override func viewWillAppear(_ animated: Bool) {
         // remember to call the super! Unless you don't want parent functionality
         super.viewWillAppear(animated)
+        // every time textfield appears, will be blank
+        usernameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -41,7 +44,6 @@ class SearchVC: UIViewController {
     }
 
     @objc func pushFollowerListVC() {
-        let followersListVC = FollowersListVC()
         // basic text validation, could get regex for further validation
         guard isUsernameEntered else {
             let title = "Empty Username"
@@ -50,9 +52,12 @@ class SearchVC: UIViewController {
             presentGFAlertOnMainThread(alertTitle: title, message: message, buttonTitle: buttonTitle)
             return
         }
-        followersListVC.username = usernameTextField.text
-        followersListVC.title = usernameTextField.text
-        navigationController?.pushViewController(followersListVC, animated: true)
+        // dismiss keyboard when navigating to search results
+        usernameTextField.resignFirstResponder()
+        if let unwrappedTextField = usernameTextField.text {
+            let followersListVC = FollowersListVC(username: unwrappedTextField)
+            navigationController?.pushViewController(followersListVC, animated: true)
+        }
     }
 
     func configureLogoImageView() {
@@ -62,10 +67,15 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         // stringly typed: dangerous, so should be moved to a constant later
-        logoImageView.image = UIImage.named("gh-logo")
+        logoImageView.image = Images.ghLogo
+
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+
+        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
+        logoImageViewTopConstraint.isActive = true
+
         // typically four constraints
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             // tip: when creating own assets use square images, much easier to layout!
             // 200 x 200 is useful as iPhone SE is 320 points, see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/
@@ -76,9 +86,9 @@ class SearchVC: UIViewController {
 
     func configureUserNameTextField() {
         view.addSubview(usernameTextField)
-		usernameTextField.autocorrectionType = .no
-		usernameTextField.autocapitalizationType = .none
-		usernameTextField.spellCheckingType = .no
+        usernameTextField.autocorrectionType = .no
+        usernameTextField.autocapitalizationType = .none
+        usernameTextField.spellCheckingType = .no
         // 👀 set the searchVC to listen for usernameTextField, easy to forget this!
         usernameTextField.delegate = self
 

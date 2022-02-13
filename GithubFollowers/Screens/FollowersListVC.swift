@@ -30,6 +30,16 @@ class FollowersListVC: UIViewController {
     // diffable data is useful for dynamic content (e.g. wifi networks, searching through a list)
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
+    init(username: String) {
+        super.init(nibName: nil, bundle: nil)
+		self.username = username
+		title = username
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // tip - have viewDidLoad read like a list of functions, refactor all logic out when possible
     // it's like a table of contents for a book
     override func viewDidLoad() {
@@ -151,10 +161,10 @@ class FollowersListVC: UIViewController {
             case let .success(user):
                 let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
                 PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-					guard let self = self else { return }
+                    guard let self = self else { return }
                     guard let error = error else {
-						self.presentGFAlertOnMainThread(alertTitle: "Success", message: "Added \(self.username ?? "this user") to favorites.", buttonTitle: "OK")
-						return
+                        self.presentGFAlertOnMainThread(alertTitle: "Success", message: "Added \(self.username ?? "this user") to favorites.", buttonTitle: "OK")
+                        return
                     }
                     self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
                 }

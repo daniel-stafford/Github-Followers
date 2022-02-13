@@ -39,11 +39,10 @@ class GFTextField: UITextField {
         backgroundColor = .tertiarySystemBackground
         // because usernames are weird!
         autocorrectionType = .no
-		// change return key text
-		returnKeyType = .go
-
-//		placeholder = "Enter a username"
-		// TODO: delete this when not testing
-		text = "Egoist"
+        // change return key text
+        returnKeyType = .go
+        // x for clearing textfield while editing
+        clearButtonMode = .whileEditing
+        placeholder = "Enter a username"
     }
 }

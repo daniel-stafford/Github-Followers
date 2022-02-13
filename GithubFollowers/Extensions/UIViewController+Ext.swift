@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 // workaround for creating a variable inside an extension
 // it's "global" but contained within this file
-fileprivate var containerView: UIView!
+private var containerView: UIView!
 
 extension UIViewController {
     func presentGFAlertOnMainThread(alertTitle: String, message: String, buttonTitle: String) {
