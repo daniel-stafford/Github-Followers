@@ -26,7 +26,10 @@ class GFFollowerCell: UICollectionViewCell {
 	// func to fill in details.  Alternative to using init
     func set(follower: Follower) {
         usernameLabel.text = follower.login
-		avatarImageView.downloadImage(from: follower.avatarUrl)
+		NetworkManager.shared.downloadImage(from: follower.avatarUrl) { [weak self] image in
+			guard let self = self else {return}
+			DispatchQueue.main.async { self.avatarImageView.image  = image }
+		}
     }
 
     private func configure() {

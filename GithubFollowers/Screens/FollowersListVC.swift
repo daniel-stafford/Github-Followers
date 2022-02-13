@@ -11,7 +11,7 @@ protocol FollowerListVCDelegate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class FollowersListVC: UIViewController {
+class FollowersListVC: GFDataLoadingVC {
     // enums are hashable by default
     // we have only one section
     enum Section { case main }
