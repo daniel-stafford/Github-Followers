@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct UIHelper {
+// use enum over struct when possible to prevent initialization
+enum UIHelper {
 	
 	static func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
 		// full width of screen
