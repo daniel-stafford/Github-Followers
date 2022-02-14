@@ -34,8 +34,8 @@ class FavoritesVC: GFDataLoadingVC {
         view.addSubview(tableView)
         tableView.frame = view.bounds
         tableView.rowHeight = 80
-		// remove empty row dividers
-		tableView.removeExcessCells()
+        // remove empty row dividers
+        tableView.removeExcessCells()
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -79,18 +79,21 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-		let desVC = FollowersListVC(username: favorite.login)
+        let desVC = FollowersListVC(username: favorite.login)
         navigationController?.pushViewController(desVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-		let favorite = favorites[indexPath.row]
-		favorites.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+        let favorite = favorites[indexPath.row]
+
         PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
             guard let self = self else { return }
-            guard let error = error else { return }
+            guard let error = error else {
+                self.favorites.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
             self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
         }
     }
