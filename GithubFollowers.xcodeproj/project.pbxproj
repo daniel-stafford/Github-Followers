@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD146DE627BA6CBB00B0CD8E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD146DE527BA6CBB00B0CD8E /* UIView+Ext.swift */; };
 		DD2172DF27ABE55C0072ECEC /* GFUserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */; };
 		DD2172E127ABF4D40072ECEC /* GFSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2172E027ABF4D40072ECEC /* GFSecondaryTitleLabel.swift */; };
 		DD27BC9C27B3D34B007F8E1F /* GFFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD27BC9B27B3D34B007F8E1F /* GFFavoriteCell.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD146DE527BA6CBB00B0CD8E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		DD2172DE27ABE55C0072ECEC /* GFUserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFUserInfoHeader.swift; sourceTree = "<group>"; };
 		DD2172E027ABF4D40072ECEC /* GFSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		DD27BC9B27B3D34B007F8E1F /* GFFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFavoriteCell.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				DD61869727AFFB3C009F9222 /* Date+Ext.swift */,
 				DD61869927AFFB6D009F9222 /* String+Ext.swift */,
 				DDE5EC6D279CCDC60011BE56 /* UIImage+Ext.swift */,
+				DD146DE527BA6CBB00B0CD8E /* UIView+Ext.swift */,
 				DDE5EC6B279CC44A0011BE56 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
@@ -443,6 +446,7 @@
 				DD61869A27AFFB6D009F9222 /* String+Ext.swift in Sources */,
 				DD41E10627A2C44B00EA7206 /* UIHelper.swift in Sources */,
 				DDE5EC6E279CCDC60011BE56 /* UIImage+Ext.swift in Sources */,
+				DD146DE627BA6CBB00B0CD8E /* UIView+Ext.swift in Sources */,
 				DDE5EC6C279CC44A0011BE56 /* UIViewController+Ext.swift in Sources */,
 				DDAD74BF279EE802000525A3 /* User.swift in Sources */,
 				DDE5CF1127A6A3D900A2B460 /* UserInfoVC.swift in Sources */,

@@ -26,9 +26,7 @@ class GFItemInfoView: UIView {
     }
 
     private func configure() {
-        addSubview(symbolImageView)
-        addSubview(titleLabel)
-        addSubview(countLabel)
+        addSubviews(symbolImageView, titleLabel, countLabel)
 
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         // passing in different SF symbols, this allows for aligning as it fills the image view
