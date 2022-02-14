@@ -23,6 +23,7 @@ class FollowersListVC: GFDataLoadingVC {
     var page = 1
     var hasMoreFollowers = true
     var isSearching = false
+	var isLoadingMoreFollowers = false
 
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
@@ -105,6 +106,7 @@ class FollowersListVC: GFDataLoadingVC {
         // Memory leak risk, so use capture risk
         // unowned force unwraps the self, little more dangerous than weak, used less
         showLoadingView()
+		isLoadingMoreFollowers = true
         NetworkManager.shared.getFollowers(for: username, page: page, completed: { [weak self] result in
             // unwrapping the optional of self, so no need for question marks, Swift 4.2
             guard let self = self else { return }
@@ -127,6 +129,7 @@ class FollowersListVC: GFDataLoadingVC {
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
+			self.isLoadingMoreFollowers = false
         })
     }
 
@@ -189,7 +192,7 @@ extension FollowersListVC: UICollectionViewDelegate {
         // get height of the screen
         let height = scrollView.frame.size.height
         if offsetY > contentHeight - height {
-            guard hasMoreFollowers else { return }
+            guard hasMoreFollowers, !isLoadingMoreFollowers else { return }
             page += 1
             getFollowers(username: username, page: page)
         }
