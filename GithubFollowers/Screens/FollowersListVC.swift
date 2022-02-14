@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class FollowersListVC: GFDataLoadingVC {
     // enums are hashable by default
     // we have only one section
@@ -21,7 +19,7 @@ class FollowersListVC: GFDataLoadingVC {
     var page = 1
     var hasMoreFollowers = true
     var isSearching = false
-	var isLoadingMoreFollowers = false
+    var isLoadingMoreFollowers = false
 
     // other functions will have to access collectionView, so we're declaring as a property
     var collectionView: UICollectionView!
@@ -104,7 +102,7 @@ class FollowersListVC: GFDataLoadingVC {
         // Memory leak risk, so use capture risk
         // unowned force unwraps the self, little more dangerous than weak, used less
         showLoadingView()
-		isLoadingMoreFollowers = true
+        isLoadingMoreFollowers = true
         NetworkManager.shared.getFollowers(for: username, page: page, completed: { [weak self] result in
             // unwrapping the optional of self, so no need for question marks, Swift 4.2
             guard let self = self else { return }
@@ -127,7 +125,7 @@ class FollowersListVC: GFDataLoadingVC {
             case let .failure(error):
                 self.presentGFAlertOnMainThread(alertTitle: "Error", message: error.rawValue, buttonTitle: "OK")
             }
-			self.isLoadingMoreFollowers = false
+            self.isLoadingMoreFollowers = false
         })
     }
 
@@ -229,7 +227,7 @@ extension FollowersListVC: UISearchResultsUpdating {
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.setContentOffset(.zero, animated: true)
-		// scroll and animate to very top (before was only on second row)
+        // scroll and animate to very top (before was only on second row)
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
 }
