@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ItemInfoVCDelegate: AnyObject {
+	func didTapGithubProfile(for user: User)
+	func didTapGetFollowers(for user: User)
+}
+
 // superclass for layout and other generic stuff
 class GFItemInfoVC: UIViewController {
     let stackView = UIStackView()
@@ -17,7 +22,7 @@ class GFItemInfoVC: UIViewController {
 
     var user: User!
 	// prevent retain cycle with delegates!
-    weak var delegate: UserInfoVCDelegate!
+    weak var delegate: ItemInfoVCDelegate!
 
     init(user: User) {
         super.init(nibName: nil, bundle: nil)

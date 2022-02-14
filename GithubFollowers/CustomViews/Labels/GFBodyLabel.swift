@@ -25,6 +25,8 @@ class GFBodyLabel: UILabel {
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         font = UIFont.preferredFont(forTextStyle: .body)
+		// allow for dynamic type
+		adjustsFontForContentSizeCategory = true
         textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75

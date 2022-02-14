@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject {
-    func didRequestFollowers(for username: String)
-}
+
 
 class FollowersListVC: GFDataLoadingVC {
     // enums are hashable by default
@@ -236,7 +234,7 @@ extension FollowersListVC: UISearchResultsUpdating {
     }
 }
 
-extension FollowersListVC: FollowerListVCDelegate {
+extension FollowersListVC: UserInfoVCDelegate {
     func didRequestFollowers(for username: String) {
         self.username = username
         resetScreen(username)

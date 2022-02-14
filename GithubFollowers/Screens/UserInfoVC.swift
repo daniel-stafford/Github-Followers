@@ -8,8 +8,7 @@
 import UIKit
 
 protocol UserInfoVCDelegate: AnyObject {
-    func didTapGithubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRequestFollowers(for username: String)
 }
 
 class UserInfoVC: GFDataLoadingVC {
@@ -20,8 +19,8 @@ class UserInfoVC: GFDataLoadingVC {
     let dateLabel = GFBodyLabel(textAlignment: .center)
 
     var username: String!
-	
-	weak var delegate: FollowerListVCDelegate!
+
+    weak var delegate: UserInfoVCDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +59,8 @@ class UserInfoVC: GFDataLoadingVC {
         add(childVC: repoItemVC, to: itemViewOne)
         add(childVC: followerItemVC, to: itemViewTwo)
         add(childVC: GFUserInfoHeader(user: user), to: headerView)
-		// .DateDecodingStrategy gives date, so only need to convert to mm YYYY
-		dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
+        // .DateDecodingStrategy gives date, so only need to convert to mm YYYY
+        dateLabel.text = "Github since \(user.createdAt.convertToMonthYearFormat())"
     }
 
     func layoutUI() {
@@ -90,7 +89,7 @@ class UserInfoVC: GFDataLoadingVC {
             itemViewTwo.heightAnchor.constraint(equalToConstant: itemHeight),
 
             dateLabel.topAnchor.constraint(equalTo: itemViewTwo.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18),
+            dateLabel.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 
@@ -109,7 +108,7 @@ class UserInfoVC: GFDataLoadingVC {
     }
 }
 
-extension UserInfoVC: UserInfoVCDelegate {
+extension UserInfoVC: ItemInfoVCDelegate {
     func didTapGithubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGFAlertOnMainThread(alertTitle: "Invalid URL", message: "The url associated with this user is invalid", buttonTitle: "OK")
@@ -120,11 +119,11 @@ extension UserInfoVC: UserInfoVCDelegate {
     }
 
     func didTapGetFollowers(for user: User) {
-		guard user.followers != 0 else {
-			presentGFAlertOnMainThread(alertTitle: "No followers", message: "This user has no followers", buttonTitle: "OK")
-			return
-		}
-		delegate.didRequestFollowers(for: user.login)
-		dismissVC()
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(alertTitle: "No followers", message: "This user has no followers", buttonTitle: "OK")
+            return
+        }
+        delegate.didRequestFollowers(for: user.login)
+        dismissVC()
     }
 }
