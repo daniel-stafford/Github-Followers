@@ -32,8 +32,8 @@ class FollowersListVC: GFDataLoadingVC {
 
     init(username: String) {
         super.init(nibName: nil, bundle: nil)
-		self.username = username
-		title = username
+        self.username = username
+        title = username
     }
 
     required init?(coder: NSCoder) {
@@ -116,11 +116,11 @@ class FollowersListVC: GFDataLoadingVC {
                 //  alternative to self.followers += followers
                 self.followers.append(contentsOf: followers)
                 if followers.isEmpty {
-					let message = "This user doesn't have any Github followers. Go follow them! 😃"
+                    let message = "This user doesn't have any Github followers. Go follow them! 😃"
 
-					DispatchQueue.main.async {
-						self.showEmptyStateView(with: message, in: self.view)
-					}
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: message, in: self.view)
+                    }
                     return
                 }
                 self.updateData(on: self.followers)
@@ -211,12 +211,12 @@ extension FollowersListVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         // user input inside search bar is unwrapped and not empty
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
-			filteredFollowers.removeAll()
-			updateData(on: followers)
-			isSearching = false
-			return
-		}
-			
+            filteredFollowers.removeAll()
+            updateData(on: followers)
+            isSearching = false
+            return
+        }
+
         isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
@@ -228,6 +228,8 @@ extension FollowersListVC: UISearchResultsUpdating {
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.setContentOffset(.zero, animated: true)
+		// scroll and animate to very top (before was only on second row)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
 }
 
