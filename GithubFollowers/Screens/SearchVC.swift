@@ -19,6 +19,7 @@ class SearchVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // white for dark mode and vice versa
         view.backgroundColor = .systemBackground
         configureLogoImageView()
@@ -119,7 +120,9 @@ class SearchVC: UIViewController {
 
 // cleaner to set delegates as separate extension
 extension SearchVC: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         pushFollowerListVC()
         return true
     }
